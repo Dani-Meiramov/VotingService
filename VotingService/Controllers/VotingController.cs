@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using VotingService.Models;
 using VotingService.Services;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace VotingService.Controllers
 {
@@ -30,25 +24,47 @@ namespace VotingService.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CreateVoting(VotingViewModel model)
         {
             if (!ModelState.IsValid)
+            {
                 return View(model);
+            }
 
-            var id =
-
-                _votingStorageService.RegisterVoting(new Voting
-                {
-                    VotingName = model.VotingName,
-                    Question = model.Question,
-                    Options = model.Options
-                });
+            var id = _votingStorageService.RegisterVoting(model);
 
             return RedirectToAction("Details", new { id = id });
         }
 
+        public IActionResult AddOption(int id)
+        {
+            return View(new VotingOptionViewModel { VotingId = id });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddOption(VotingOptionViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            _votingStorageService.AddOption(model);
+
+            return RedirectToAction("Details", new { id = model.VotingId });
+        }
+
         public IActionResult Details(int id)
         {
+            return View(_votingStorageService.GetVoting(id));
+        }
+
+        public IActionResult ShowVotingResult(int id, int selectedOption)
+        {
+            _votingStorageService.GetVoting(id).Options[selectedOption].VoteCount++;
+
             return View(_votingStorageService.GetVoting(id));
         }
     }

@@ -1,2 +1,19 @@
-﻿@model Voting
+﻿@model VotingViewModel
 
+<h1>Question: @Model.Question?</h1>
+<h3>Options:</h3>
+
+<ul>
+    @for (var i = 0; i < Model.Options.Count; i++)
+    {
+        <li>
+            <a asp-action="ShowVotingResult" asp-route-id="@Model.Id"
+               asp-route-selectedOption="@Model.Options[i].Id">@Model.Options[i].Option</a>
+        </li>
+    }
+</ul>
+
+<ul>
+    <li><a asp-action="AddOption" asp-route-id="@Model.Id">Add Option</a></li>
+    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+</ul>

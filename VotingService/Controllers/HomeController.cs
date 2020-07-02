@@ -1,5 +1,4 @@
-﻿using VotingService.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace VotingService.Controllers
 {
@@ -9,12 +8,5 @@ namespace VotingService.Controllers
         {
             return View();
         }
-
-        //[HttpPost]
-        //public IActionResult Index(int option, VotingViewModel model)
-        //{
-        //    model.Options[option].VoteCount++;
-        //    return View("Result", model);
-        //}
     }
 }

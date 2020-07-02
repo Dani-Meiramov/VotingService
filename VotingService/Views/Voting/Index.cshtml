@@ -1,8 +1,12 @@
-﻿@model List<Voting>
+﻿@model List<VotingViewModel>
 
 <h2>Voting List</h2>
 
-@foreach (var item in Model)
-{
-    <a asp-action="Details" asp-route-id="@item.Id">@item.VotingName</a>
-}
+<ol>
+    @foreach (var item in Model)
+    {
+        <li><a asp-action="Details" asp-route-id="@item.Id">@item.VotingName</a></li>
+    }
+</ol>
+
+<a asp-action="CreateVoting" method="get">Create Voting</a>

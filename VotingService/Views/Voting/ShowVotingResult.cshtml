@@ -1,0 +1,14 @@
+﻿@model VotingViewModel
+
+<h2>@Model.Question?</h2>
+
+<table>
+    <tr><th>Option</th><th>Vote Count</th></tr>
+    @for (var i = 0; i < Model.Options.Count; i++)
+    {
+        <tr>
+            <td>@Model.Options[i].Option</td>
+            <td>@Model.Options[i].VoteCount</td>
+        </tr>
+    }
+</table>

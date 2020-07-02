@@ -1,29 +1,6 @@
-﻿@*@model VotingService.Models.VotingViewModel*@
-
-<h2>Voting</h2>
+﻿<h2>Voting</h2>
 
 <ul>
     <li><a asp-controller="SignIn" asp-action="SignIn">Sign in</a></li>
     <li><a asp-controller="Voting" asp-action="Index">Voting List</a></li>
 </ul>
-
-@*<form asp-action="Index">
-        @if (Model.Options != null)
-        {
-            <input type="hidden" asp-for="VotingName" />
-            for (var i = 0; i < Model.Options.Count; i++)
-            {
-                <input type="hidden" asp-for="Options[i].Option" />
-                <input type="hidden" asp-for="Options[i].VoteCount" />
-            }
-        }
-
-        <div class="form-group">
-            <p><b>Choose your option</b></p>
-            <p><input name="option" type="radio" value="0">@Model.Options[0].Option</p>
-            <p><input name="option" type="radio" value="1">@Model.Options[1].Option</p>
-            <p><input name="option" type="radio" value="2">@Model.Options[2].Option</p>
-            <p><input name="option" type="radio" value="3">@Model.Options[3].Option</p>
-            <p><input type="submit" value="Выбрать"></p>
-        </div>
-    </form>*@

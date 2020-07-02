@@ -5,8 +5,9 @@ namespace VotingService.Services
 {
     public interface IVotingStorageService
     {
-        int RegisterVoting(Voting model);
-        List<Voting> GetVotingsList();
-        Voting GetVoting(int id);
+        int RegisterVoting(VotingViewModel model);
+        List<VotingViewModel> GetVotingsList();
+        VotingViewModel GetVoting(int id);
+        void AddOption(VotingOptionViewModel model);
     }
 }

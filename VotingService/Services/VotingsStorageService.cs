@@ -1,32 +1,48 @@
-﻿using System;
-using VotingService.Models;
+﻿using VotingService.Models;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 
 namespace VotingService.Services
 {
     public class VotingsStorageService : IVotingStorageService
     {
-        private readonly List<Voting> votings = new List<Voting>();
+        private readonly List<Voting> _votings = new List<Voting>();
+        private readonly IMapper _mapper;
 
-        public int RegisterVoting(Voting model)
+        public VotingsStorageService(IMapper mapper)
         {
-            lock (votings)
+            _mapper = mapper;
+        }
+
+        public int RegisterVoting(VotingViewModel model)
+        {
+            var mapped = _mapper.Map<Voting>(model);
+            mapped.Id = _votings.Count;
+
+            lock (_votings)
             {
-                votings.Add(model);
+                _votings.Add(mapped);
             }
 
-            return 0;
+            return mapped.Id;
         }
 
-        public List<Voting> GetVotingsList()
+        public VotingViewModel GetVoting(int id)
         {
-            return votings;
+            return _mapper.Map<VotingViewModel>(_votings.FirstOrDefault(x => x.Id == id));
         }
 
-        public Voting GetVoting(int id)
+        public List<VotingViewModel> GetVotingsList()
         {
-            return votings.FirstOrDefault(x => x.Id == id);
+            return _mapper.Map<List<Voting>, List<VotingViewModel>>(_votings);
+        }
+
+        public void AddOption(VotingOptionViewModel model)
+        {
+            var votingOptions = _votings[model.VotingId].Options;
+            model.OptionData.Id = votingOptions.Count;
+            votingOptions.Add(model.OptionData);
         }
     }
 }

@@ -11,12 +11,15 @@ namespace VotingService.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult SignIn(SignInViewModel model)
         {
             if (!ModelState.IsValid)
+            {
                 return View(model);
+            }
 
-            return RedirectToAction("CreateVoting", "Voting");
+            return RedirectToAction("Index", "Voting");
         }
     }
 }
