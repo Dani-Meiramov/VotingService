@@ -1,12 +1,15 @@
 ﻿@model List<VotingViewModel>
+@{
+    ViewData["Title"] = "Voting List";
+}
 
 <h2>Voting List</h2>
 
 <ol>
-    @foreach (var item in Model)
+    @foreach (var voting in Model)
     {
-        <li><a asp-action="Details" asp-route-id="@item.Id">@item.VotingName</a></li>
+        <li><a asp-action="Details" asp-route-id="@voting.Id">@voting.VotingName</a></li>
     }
 </ol>
 
-<a asp-action="CreateVoting" method="get">Create Voting</a>
+<a class="btn btn-primary" method="get" asp-action="CreateVoting">Create Voting</a>

@@ -1,25 +1,24 @@
 ﻿@model VotingViewModel;
+@{
+    ViewData["Title"] = "Create Voting";
+}
 
-<form asp-action="CreateVoting" method="post">
+<form method="post" asp-action="CreateVoting">
     <div class="form-group">
-        <label class="col-md-2"><b>Voting Name</b></label>
-        <div class="col-md-2">
-            <span asp-validation-for="VotingName" class="text-danger"></span>
-            <input asp-for="VotingName" type="text" class="form-control" />
-        </div>
+        <label asp-for="VotingName"></label>
+        <input asp-for="VotingName" class="form-control" />
+        <span asp-validation-for="VotingName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label class="col-md-2"><b>Question</b></label>
-        <div class="col-md-2">
-            <span asp-validation-for="Question" class="text-danger"></span>
-            <input asp-for="Question" type="text" class="form-control" />
-        </div>
+        <label asp-for="Question"></label>
+        <input asp-for="Question" class="form-control" />
+        <span asp-validation-for="Question" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <div class="col-md-2">
-            <button class="btn btn-primary">Create Voting</button>
-        </div>
+        <button type="submit" class="btn btn-primary">Create Voting</button>
     </div>
 </form>
 
-<a asp-controller="Home" asp-action="Index">Home</a>
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

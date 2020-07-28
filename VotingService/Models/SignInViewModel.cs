@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace VotingService.Models
 {
@@ -11,7 +10,8 @@ namespace VotingService.Models
 
         [Required(ErrorMessage = "Password is Required")]
         [DataType(DataType.Password)]
+        //[UIHint("Password")]
         [RegularExpression(@"123", ErrorMessage = "Wrong password")]
-        public String Password { get; set; }
+        public string Password { get; set; }
     }
 }

@@ -1,17 +1,20 @@
 ﻿@model VotingOptionViewModel
+@{
+    ViewData["Title"] = "Add Option";
+}
 
 <form method="post">
-    <input type="hidden" asp-for="@Model.VotingId" />
+    <input asp-for="@Model.VotingId" type="hidden" />
     <div class="form-group">
-        <label class="col-md-2"><b>Option</b></label>
-        <div class="col-md-2">
-            <span asp-validation-for="@Model.OptionData.Option" class="text-danger"></span>
-            <input asp-for="@Model.OptionData.Option" type="text" class="form-control" />
-        </div>
+        <label asp-for="@Model.OptionData.Option"><b>Option</b></label>
+        <input asp-for="@Model.OptionData.Option" class="form-control" />
+        <span asp-validation-for="@Model.OptionData.Option" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <div class="col-md-2">
-            <button class="btn btn-primary">Add Option</button>
-        </div>
+        <button type="submit" class="btn btn-primary">Add Option</button>
     </div>
 </form>
+
+@section scripts{ 
+    <partial name="_ValidationScriptsPartial.cshtml" />
+}

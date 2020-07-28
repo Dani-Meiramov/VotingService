@@ -39,7 +39,7 @@ namespace VotingService.Controllers
 
         public IActionResult AddOption(int id)
         {
-            return View(new VotingOptionViewModel { VotingId = id });
+            return View(new VotingOptionViewModel {VotingId = id});
         }
 
         [HttpPost]

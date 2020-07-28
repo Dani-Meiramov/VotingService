@@ -1,14 +1,26 @@
 ﻿@model VotingViewModel
+@{
+    ViewData["Title"] = "Voting Results";
+}
 
-<h2>@Model.Question?</h2>
-
-<table>
-    <tr><th>Option</th><th>Vote Count</th></tr>
-    @for (var i = 0; i < Model.Options.Count; i++)
+@{
+    int totalNumberOfVotes = 0;
+    @foreach (var optionData in Model.Options)
     {
-        <tr>
-            <td>@Model.Options[i].Option</td>
-            <td>@Model.Options[i].VoteCount</td>
-        </tr>
+        totalNumberOfVotes += optionData.VoteCount;
     }
-</table>
+}
+<section>
+    @foreach (var optionData in Model.Options)
+    {
+        var percent = 100 * optionData.VoteCount / totalNumberOfVotes;
+        <div>
+            @optionData.Option
+            (Голосов: @optionData.VoteCount)
+            @percent%
+        </div>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: @percent%"></div>
+        </div>
+    }
+</section>

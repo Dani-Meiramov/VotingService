@@ -13,7 +13,7 @@ namespace VotingService
         {
             services.AddMvc(options => options.EnableEndpointRouting = false).AddRazorRuntimeCompilation();
             services.AddSingleton<IVotingStorageService, VotingsStorageService>();
-
+            
             // Auto Mapper Configurations
             var mappingConfig = new MapperConfiguration(mc =>
             {

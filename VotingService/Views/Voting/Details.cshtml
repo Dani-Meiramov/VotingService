@@ -1,19 +1,24 @@
 ﻿@model VotingViewModel
+@{
+    ViewData["Title"] = "Details";
+}
 
-<h1>Question: @Model.Question?</h1>
-<h3>Options:</h3>
-
-<ul>
-    @for (var i = 0; i < Model.Options.Count; i++)
-    {
-        <li>
-            <a asp-action="ShowVotingResult" asp-route-id="@Model.Id"
-               asp-route-selectedOption="@Model.Options[i].Id">@Model.Options[i].Option</a>
-        </li>
-    }
-</ul>
-
-<ul>
-    <li><a asp-action="AddOption" asp-route-id="@Model.Id">Add Option</a></li>
-    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-</ul>
+<div class="row">
+    <div class="col-12">
+        <section class="card bg-light">
+            <div class="card-body">
+                <h4 class="text-center">@Model.Question</h4>
+                <hr />
+                <div class="list-group">
+                    @foreach (var optionData in Model.Options)
+                    {
+                         <a class="list-group-item list-group-item-action mb-2"
+                            asp-action="ShowVotingResult" asp-route-id="@Model.Id"
+                            asp-route-selectedOption="@optionData.Id">@optionData.Option</a>
+                    }
+                </div>
+            </div>
+            <a class="btn btn-primary" asp-action="AddOption" asp-route-id="@Model.Id">Add Option</a>
+        </section>
+    </div>
+</div>
